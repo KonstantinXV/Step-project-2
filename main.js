@@ -2,22 +2,32 @@ let section = document.querySelector('section');
 let select = document.querySelector('.selectcharacter');
 let inputName = document.querySelector('#inputname');
 let individual = document.querySelector('.individualCard')
-let individImgDiv =document.querySelector('.individ-img-div')
-let individImg = document.querySelector
+let sameCard = document.querySelector('.sameCard')
+let button = document.querySelectorAll('.btn.btn-primary')
+let body = document.querySelector('body')
+let page = document.location.pathname;
+// section.innerHTML = "";
+// individual.innerHTML = "";
+console.log(page);
+
 
 let apiUrl = 'https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/all.json';
 let apiResponse = []; // სრული API შეყვანილია მასივში
 
-
+  
 // 1 API დაკავშირება<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     apiResponse = data;
     htmlRenderer();
+    
+    
   });
-
-
+  
+  if (page == "/characters.html") {
+    
+  
 // 2 სელექტის დაკომპლექტება ისე რომ არ მოხდეს დუბლირება<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function htmlRenderer() {
   let uniqueSpecies = new Set();   //მხოლოდ უნიკალური დასახელებეს ინახავს  
@@ -31,7 +41,7 @@ function htmlRenderer() {
     select.innerHTML += `<option value="${species}">${species}</option>`;
   });
 
-
+  
 // 2 სტარტ ფუნქცია, ძირითადი ლოგიკა<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 start(); 
 }
@@ -59,11 +69,13 @@ function start() {
         }
       });
     }
+    
   }
 
 
 // 3 ფუნქცია, რომელიც ქმნის HTML ქარდებს<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 function sectionData(character) {
+  
   let char= `
   <div class="cardtheme card" style="width: 18rem">
       <img src="${character.image}" class="cardtheme card-img-top" alt="..." />
@@ -73,9 +85,13 @@ function sectionData(character) {
         <h6 class="card-text">Homeworld: ${character.homeworld}</h6>
         <h6 class="card-text" style="color: #EB202E">Masters: ${character.masters}</h6>
         <p class="card-text">${character.affiliations[0]}</p>
-        <a href="./individual.html"class="btn btn-primary" style="background-color:#FADE4B">Click for more</a>
+        <a href="./individual.html" onclick="clickCard(${character.id})" class="btn btn-primary" style="background-color:#FADE4B">Click for more </a>
       </div>
-    </div>`
+      <p class="sameCard">ID${character.id}</p>
+    </div>`;
+    // sameCard.innerHTML +=character.id
+    
+  
     return char
 }
 
@@ -84,7 +100,24 @@ function sectionData(character) {
 select.addEventListener('change', start);
 inputName.addEventListener('input', start);
 
+}
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+let individualPage = '0'
+
+// sessionStorage.setItem('saveCard', individualPage)
+
+function clickCard(id){
+  
+  individualPage=id;
+  window.location.href='./individual.html'
+  console.log(individualPage);
+  sessionStorage.setItem('saveCard', individualPage)
+}
+
+
+if (page == "/individual.html") {
+sessionStorage.getItem('saveCard')
 // function individual(character) {
 //     let individ= `<div class="individ-img-div">
 //     <img class="individ-img" src="${character.image}" alt="" />
@@ -94,15 +127,62 @@ inputName.addEventListener('input', start);
 //       return individ
 //   }
 
-individStart()
-  function individStart(){
+
+  function htmlRenderer(){
     
+   individualPage= sessionStorage.getItem('saveCard')
         apiResponse.forEach(character => {
+       
+          console.log(individualPage);
+          if(individualPage==character.id){
+            individual.textContent=''
         individual.innerHTML+=`<div class="individ-img-div">
-        //     <img class="individ-img" src="${character.image}" alt="" />
-        //     <h3 class="individ-name">${character.name}</h3>
-        //   </div>
-        //       `
-    }) }
-    
+            <img class="individ-img" src="${character.image}" alt="" />
+            <h3 class="individ-name">${character.name}</h3>
+            <div class="cardInfo">
+            <p class="homeland2"><h5 style="display: inline; color:yellow">homeland:</h5>            ${character.homeworld} </p>
+            <p class="species2"><h5 style="display: inline; color:yellow">species:</h5>              ${character.species}</p>
+            <p class="gender2"><h5 style="display: inline; color:yellow">gender:</h5>              ${character.gender}</p>
+            <p class="height"><h5 style="display: inline; color:yellow">height:</h5>              ${character.height}</p>
+            <p class="hairColor"><h5 style="display: inline; color:yellow">hairColor:</h5>              ${character.hairColor}</p>
+            <p class="eyeColor"><h5 style="display: inline; color:yellow">eyeColor:</h5>              ${character.eyeColor}</p>
+            <p class="skinColor"><h5 style="display: inline; color:yellow">skinColor:</h5>              ${character.skinColor}</p>
+            <p class="bornLocation"><h5 style="display: inline; color:yellow">bornLocation:</h5>              ${character.bornLocation}</p>
+            <p class="born"><h5 style="display: inline; color:yellow">born:</h5>              ${character.born}</p>
+            <p class="died"><h5 style="display: inline; color:yellow">died:</h5>              ${character.died}</p>
+            <p class="diedLocation"><h5 style="display: inline; color:yellow">diedLocation:</h5>              ${character.diedLocation}</p>
+            <p class="cybernetics"><h5 style="display: inline; color:yellow">cybernetics:</h5>              ${character.cybernetics}</p>
+            <p class="affiliations"><h5 style="display: inline; color:yellow">affiliations:</h5>              ${character.affiliations}</p>
+            <p class="masters2"><h5 style="display: inline; color:yellow">masters:</h5>              ${character.masters}</p>
+            <p class="apprentices2"><h5 style="display: inline; color:yellow">apprentices:</h5>              ${character.apprentices}</p>
+            </div>
+            <a class="wiki" href="${character.wiki}" target="_blank"><button class="wikiCard">Click for more</button></a>
+          </div>
+              `
+    }
   
+})
+  } 
+  console.log(individualPage);
+  }
+  let movieCard = document.querySelector('.movieCard') 
+  if(page=='./films.html'){
+    filmRanderer()
+let apiUrlFilms = 'https://swapi.dev/api/films/1/';
+fetch(apiUrlFilms)
+.then(response => response.json())
+.then(films => filmRanderer(films))
+
+
+function filmRanderer(films){
+
+  films.forEach(f => {
+    movieCard.innerHTML +=`
+    <div><p>${f.title}</p></div>
+    ` 
+    
+  })
+
+}
+console.log(f.title);
+}
