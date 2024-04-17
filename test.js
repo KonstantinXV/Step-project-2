@@ -80,3 +80,56 @@ function sectionData(character) {
 // 4 ღილაკები რომელზეც მოქმედების შედეგად გაიშვება სტარტ ფუნქცია<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 select.addEventListener('change', start);
 inputName.addEventListener('input', start);
+
+
+
+
+
+<!-- Data binding ინფორმაციის მიმოცვლას
+
+            one way binding ინფორმაციის ცალმხრივი გაცვლა (ინტერპოლაცია)
+            property binding 
+            event binding 
+            two way binding -->
+
+
+<h1>{{firstName}}</h1>
+
+<!-- <img [src]="imgUrl" alt="Random Photo"> -->
+
+<button (click)="textLogger()" class="btn btn-success">Click</button>
+
+<br>
+<label>Enter Text</label>
+<input [(ngModel)]="inputText" type="text" class="form-control">
+
+<h1>{{inputText}}</h1>
+
+
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular3';
+
+  public firstName:String = "Sandro";
+
+  public imgUrl:String = "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGhvdG98ZW58MHx8MHx8fDA%3D";
+
+
+
+  textLogger() {
+    console.log("btn was clicked");
+    
+  }
+
+
+  public inputText!:String
+
+}

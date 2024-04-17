@@ -1,5 +1,5 @@
 nav{
-    border: 2px solid black;
+    border: 2px solid rgb(244, 9, 9);
     height: 250px;
     display: flex;
     width: 100%;
@@ -7,21 +7,26 @@ nav{
 }
 .imgback{
     
-   border: 2px solid green;
+   border: 2px solid rgb(2, 0, 128);
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
 body{
     background-color: #1D1E1F !important;
+    /* width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 }
 .logo{
     border: 2px solid red;
     width: 400px;
     height: 200px;
-    display: block;
-    position: absolute;
-    right: 1000px;
+   position: absolute;
+    
+    
 }
 .logoimg{
     width: 100%;
@@ -59,14 +64,23 @@ ul{
     font-size: 20px;
    
 }
+.main2{
+    border: 4px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 54%;
+    position: relative;
+    left: 23%;
+      
+  }
 .carousel-item {
     width: 1000px !important; /* Adjust the width as needed */
   }
   .carousel{
-    position: relative;
-    top: 50px;
-    left: 700px;
-    width: 1000px;
+    border: 2px dotted green;
+   
   }
 .carousel-div{
     border: 2px solid red;
@@ -142,14 +156,30 @@ section{
 
 
 /* CHARACTERS |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+.main{
+  border: 4px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    
+}
+.chooser{
+    border: 2px solid yellowgreen;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 
+}
+.label{
+    border: 2px solid pink;
+    width: 250px;
+}
 .selectcharacter{
     background-color: #1D1E1F;
     border: 2px solid red;
     width: 200px;
-    position: relative;
-    left:1630px;
-    top: -30px;
+  
     color: white;
    
 
@@ -158,14 +188,13 @@ section{
 #inputname{
     background-color: #1D1E1F;
     color: white;
-    position: relative;
-    left: 500px;
+  
     border:1px solid white;
 }
 .inputname{
     color: white;
     position: relative;
-    left: 500px;
+    
 }
 .btn{
     color: #1D1E1F !important;
@@ -178,9 +207,11 @@ section{
 section{
     border:2px solid white;
     display: flex;
-    justify-content: space-around;
-    position: relative;
-    left: 200px
+    margin-left: 0px;
+    justify-content: center;
+  
+    
+    
 }
 /* individualCard<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, */
 
@@ -334,4 +365,35 @@ section{
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* films///////////////////////////////////////////////////////////// */
+
+
+        .cardtheme2{
+            background-color: #1D1E1F !important;
+            height: 400px;
+            object-fit: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+        }
+        .movieCard{
+            border: 2px solid blue;
+            width: 1100px;
+            align-self: center;
+            gap: 20pxpx!important;
+            justify-content: space-between;
+
+        }
+        .ind-div{
+            border: 2px solid yellowgreen;
+            display: flex;
+            justify-content: center;
+           
+            flex-direction: column;
+            
+          
+
         }

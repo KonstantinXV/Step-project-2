@@ -131,9 +131,10 @@ sessionStorage.getItem('saveCard')
   function htmlRenderer(){
     
    individualPage= sessionStorage.getItem('saveCard')
+   
         apiResponse.forEach(character => {
        
-          console.log(individualPage);
+          
           if(individualPage==character.id){
             individual.textContent=''
         individual.innerHTML+=`<div class="individ-img-div">
@@ -163,26 +164,87 @@ sessionStorage.getItem('saveCard')
   
 })
   } 
-  console.log(individualPage);
+  
   }
-  let movieCard = document.querySelector('.movieCard') 
-  if(page=='./films.html'){
-    filmRanderer()
-let apiUrlFilms = 'https://swapi.dev/api/films/1/';
-fetch(apiUrlFilms)
-.then(response => response.json())
-.then(films => filmRanderer(films))
+  // ///////////////////////////////////////////////////////////////
+  let movieCard = document.querySelector('.movieCard');
+  let filmPage =Number(0)
+ 
+  if (page === '/films.html') {
+      fetch('https://swapi.dev/api/films/')
+          .then(response => response.json())
+          .then(data => {
+              filmRenderer(data.results)
+              filmRenderer2(data.results)
+          })
+         
+ 
+  
+  function filmRenderer(films) {
+    if(filmPage == Number(0)){
+      movieCard.innerHTML = '';
+      films.forEach(film => {
+          movieCard.innerHTML += `
+          
+          <div class="cardtheme2 card" style="width: 18rem;">
+          <img  src="./img/${film.title}.png" class="cardtheme2 card-img-top" alt="...">
+          <div class="cardtheme card-body">
+            <h5 class=" card-title">${film.title}</h5>
+            <h5 class=" card-title">Episode: ${film.episode_id}</h5>
+            <p class="card-text">Director: ${film.director}</p>
+            <a href="#" onclass="btn btn-primary">Go somewhere</a>
+            <a href="#" onclick="clickCard2(${film.episode_id})" class="btn btn-primary" style="background-color:#FADE4B">Click for more </a>
+            </div>
+          </div>
+        </div>
+          `;
+      });
+  }
+}
 
-
-function filmRanderer(films){
-
-  films.forEach(f => {
-    movieCard.innerHTML +=`
-    <div><p>${f.title}</p></div>
-    ` 
-    
+let clearBtn=document.querySelectorAll('.a');
+clearBtn.forEach(index=>{index.addEventListener('click', function(){
+  sessionStorage.clear();
+  filmPage == Number(0)
   })
+})
 
-}
-console.log(f.title);
-}
+  function filmRenderer2(films){
+    filmPage=Number(sessionStorage.getItem('saveCard2'))
+   
+    console.log(filmPage);
+    
+    
+    films.forEach(film => {
+      console.log(film.episode_id);
+      if(filmPage===film.episode_id){
+        movieCard.innerHTML ='' 
+       
+
+      movieCard.innerHTML += `
+      
+      <div class="cardtheme2 card" style="width: 18rem;">
+      <img  src="./img/${film.title}.png" class="cardtheme2 card-img-top" alt="...">
+      <div class="cardtheme card-body">
+        <h5 class=" card-title">${film.title}</h5>
+        <h5 class=" card-title">Episode: ${film.episode_id}</h5>
+        <p class="card-text">Director: ${film.director}</p>
+        <a href="#" onclass="btn btn-primary">Go somewhere</a>
+        <a href="#" onclick="clickCard2(${film.episode_id})" class="btn btn-primary" style="background-color:#FADE4B">Click for more </a>
+        </div>
+      </div>
+    </div>
+      `;
+   
+  } 
+  }
+   )
+  }
+  function clickCard2(episode_id){
+    filmPage = episode_id;
+    sessionStorage.setItem('saveCard2', filmPage)
+    location.reload()
+  }
+};
+
+
